@@ -1,4 +1,8 @@
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 print("Dados necessários: ")
 local = input("Digite o local que deseja ver as noticias: ")
@@ -7,7 +11,7 @@ limite= int(input("Digite o limíte de notícias: "))
 
 url = "https://api.thenewsapi.com/v1/news/top"
 
-api_token= '5gEqLPTAs0YIReAqw2dVuh7DITBXKabUdVOAqbYd'
+api_token = os.getenv("THE_NEWS_API_TOKEN")
 
 params = {
     'api_token': api_token,
