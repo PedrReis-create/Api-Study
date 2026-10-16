@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from models import Usuario
 from dependencies import pegar_sessao
 
@@ -12,7 +12,7 @@ async def home():
     return {"mensagem":"Rota padrão de autenticação", "autenticado": False}
 
 @auth_router.post("/criar_conta")
-async def criar_conta(email:str, senha:str, nome:str, session = pegar_sessao()):
+async def criar_conta(email:str, senha:str, nome:str, session = Depends(pegar_sessao)):
     usuario = session.query(Usuario).filter(Usuario.email==email).first()
     if usuario:
         return {"mensagem":"já existe um usuário com esse email"}
